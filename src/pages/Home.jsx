@@ -6,13 +6,15 @@ import { FiUser } from 'react-icons/fi';
 import { LuSettings } from 'react-icons/lu';
 import { BsMoon } from 'react-icons/bs';
 import { BsSun } from 'react-icons/bs';
-import { Link } from 'react-router-dom';
+import { Link, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react'
+import Dashboard from './Dashboard';
+import Hiragana from './Hiragana';
 
 function Home() {
     const menus = [
         { name: "Dashboard", link: '/', icon: LuLayoutDashboard },
-        { name: "User", link: '/', icon: FiUser },
+        { name: "Hiragana", link: '/hiragana', icon: FiUser },
         { name: "EX", link: '/', icon: FiUser },
         { name: "Setting", link: '/', icon: LuSettings, margin: true },
         { name: "EX", link: '/', icon: LuSettings },
@@ -85,7 +87,10 @@ function Home() {
                     </div>
                 </div>
                 <div className="m-3 text-xl font-semibold">
-                    REACT TAILWIND
+                    <Routes>
+                        <Route path='/' element={<Dashboard/>}/>
+                        <Route path='/hiragana' element={<Hiragana/>}/>
+                    </Routes>
                 </div>
             </section>
         </>
