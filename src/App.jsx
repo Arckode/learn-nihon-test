@@ -10,7 +10,7 @@ function App() {
     <>
       <section className="flex gap-6 dark:text-gray-100 dark:bg-slate-900 duration-100">
         <Sidebar />
-        <div className="m-3 text-xl font-semibold">
+        <div className="text-xl font-semibold w-screen">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/hiragana" element={<Hiragana />} />
