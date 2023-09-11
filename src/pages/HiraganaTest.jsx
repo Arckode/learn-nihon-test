@@ -2,11 +2,12 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 // import './App.css'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { useLocation } from "react-router-dom";
 
 function HiraganaTest() {
+  const effectRan = useRef(false)
   const location = useLocation();
   const hiragana = location.state.details;
 
@@ -21,64 +22,85 @@ function HiraganaTest() {
   //   hiragana.push({ romanji: "bb", hieagana: "bb" });
   // }
 
-  console.log(hiragana);
+  // console.log(hiragana);
 
-  // const [input, setInput] = useState("");
-  // const [current, setCurrent] = useState(0);
+  const [input, setInput] = useState("");
+  const [current, setCurrent] = useState(0);
 
-  // const [streak, setStreak] = useState(0);
-  // const [maxStreak, setMaxStreak] = useState(0);
+  const [streak, setStreak] = useState(0);
+  const [maxStreak, setMaxStreak] = useState(0);
 
-  // const [error, setError] = useState(false);
+  const [error, setError] = useState(false);
+  const [correct, setCorrect] = useState(false)
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [isShown, setIsShown] = useState(false);
 
-  // const setRandomHiragana = () => {
-  //   const randomIndex = Math.floor(Math.random() * hiragana.length);
-  //   setCurrent(randomIndex);
-  // };
+  const setRandomHiragana = () => {
+    const randomIndex = Math.floor(Math.random() * hiragana.length);
+    setCurrent(randomIndex);
+  };
 
-  // const handleChange = (e) => {
-  //   setInput(e.target.value);
-  // };
+  const handleChange = (e) => {
+    setInput(e.target.value);
+  };
 
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsDisabled(!isDisabled)
+    if (input.toLocaleLowerCase() === hiragana[current].romanji) {
+      setStreak(streak + 1)
+      setMaxStreak(Math.max(streak + 1, maxStreak))
+      setError(false)
+      setIsShown(true)
+      setCorrect(`Nice, Keep It Up!`)
 
-  //   if (input.toLowerCase() === hiragana[current].romanji) {
-  //     setStreak(streak + 1);
-  //     setMaxStreak(streak + 1 > maxStreak ? streak + 1 : maxStreak);
-  //     setError(false);
+      localStorage.setItem('maxStreak', Math.max(streak, maxStreak))
+      localStorage.setItem('streak', streak + 1)
+    } else {
+      setStreak(0)
+      setError(`Wrong! The correct answer for ${hiragana[current].hiragana} is ${hiragana[current].romanji}`)
+      setCorrect(false)
+      setIsShown(true)
+      localStorage.setItem('streak', 0)
+    }
 
-  //     localStorage.setItem("streak", streak + 1);
-  //     localStorage.setItem(
-  //       "maxStreak",
-  //       streak + 1 > maxStreak ? streak + 1 : maxStreak
-  //     );
-  //   } else {
-  //     const h = hiragana[current].hiragana;
-  //     const r = hiragana[current].romanji;
-  //     setError(`Wrong! The correct answer for ${h} is ${r}`);
-  //     setStreak(0);
-  //     localStorage.setItem("streak", 0);
-  //   }
+    // setInput("");
+    // setRandomHiragana();
+  };
 
-  //   setInput("");
-  //   setRandomHiragana();
-  // };
+  const nextHiragana = () => {
+    setInput('')
+    setRandomHiragana()
+    setIsDisabled(!isDisabled)
+    setIsShown(false)
+  }
 
-  // useEffect(() => {
-  //   setRandomHiragana();
-  //   setStreak(parseInt(localStorage.getItem("streak")) || 0);
-  //   setMaxStreak(parseInt(localStorage.getItem("maxStreak")) || 0);
-  //   console.log("a");
-  // }, []);
+  const addHiragana = () => {
+    if (location.state.id == 1) {
+      hiragana.push({ romanji: "bb", hieagana: "bb" });
+    }
+  }
+
+  useEffect(() => {
+    if (effectRan.current === false) {
+      addHiragana()
+      setRandomHiragana()
+      setStreak(parseInt(localStorage.getItem('streak')) || 0)
+      setMaxStreak(parseInt(localStorage.getItem('maxStreak')) || 0)
+
+      return () => {
+        effectRan.current = true
+      }
+    }
+  }, []);
   return (
     <>
-      {/* <div className="text-center min-h-screen flex flex-col justify-center">
+      <div className="text-center min-h-screen flex flex-col justify-center">
         <header className="p-6 mb-8">
           <h1 className="text-4xl font-bold uppercase">Hiragana Quiz</h1>
           <div>
             <p>
-              Streak {streak} / {maxStreak}
+              {/* Streak {streak} / {maxStreak} */}
               Streak {streak}, Keep It Up!
             </p>
           </div>
@@ -92,18 +114,19 @@ function HiraganaTest() {
           <form onSubmit={handleSubmit}>
             <input
               type="text"
+              disabled={isDisabled}
               onChange={handleChange}
               value={input}
               className="block w-24 bg-transparent border-b-2 border-b-black dark:border-b-white mx-auto outline-none text-center text-6xl pb-2"
             />
+            {!isShown && <button disabled={!input} type="submit" className='pt-10'> Submit </button>}
           </form>
         </div>
-        {error && (
-          <div>
-            <p>{error}</p>
-          </div>
-        )}
-      </div> */}
+        {(error && isShown) && <p className="text-red-500 text-center">{error}</p>}
+        {(correct && isShown) && <p className="text-green-500 text-center">{correct}</p>}
+
+        {((error || correct) && isShown) && <button onClick={nextHiragana}>Gimme Next!</button>}
+      </div>
     </>
   );
 }
