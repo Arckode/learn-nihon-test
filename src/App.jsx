@@ -3,6 +3,7 @@ import "./App.css";
 import { Link, Route, Routes } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Hiragana from "./pages/Hiragana";
+import Katakana from "./pages/Katakana";
 import Sidebar from "./component/Sidebar";
 import HiraganaTest from "./pages/HiraganaTest";
 
@@ -15,6 +16,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/hiragana" element={<Hiragana />} />
+            <Route path="/katakana" element={<Katakana />} />
             <Route path="/hiraganaTest" element={<HiraganaTest />} />
           </Routes>
         </div>
