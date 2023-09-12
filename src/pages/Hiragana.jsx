@@ -227,7 +227,7 @@ function Hiragana(props) {
                 <div className="text-sm pb-5" key={hiragana.id}>
                   <h6 className="text-center pb-3">{hiragana.name}</h6>
                   <div className="flex flex-row justify-center items-center pb-5">
-                    <div className="grid grid-cols-5 grid-rows-1 gap-4 grid-flow-row-dense w-fit">
+                    <div className="flex flex-row flex-wrap gap-3 w-fit">
                       {hiragana.details.map((character) => (
                         <div
                           className="p-5 bg-white dark:bg-slate-700 border-1-8 border-transparent rounded-md shadow-md space-y-2 flex flex-col items-center"

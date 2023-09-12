@@ -6,6 +6,7 @@ import Hiragana from "./pages/Hiragana";
 import Katakana from "./pages/Katakana";
 import Sidebar from "./component/Sidebar";
 import HiraganaTest from "./pages/HiraganaTest";
+import KatakanaTest from "./pages/KatakanaTest";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path="/hiragana" element={<Hiragana />} />
             <Route path="/katakana" element={<Katakana />} />
             <Route path="/hiraganaTest" element={<HiraganaTest />} />
+            <Route path="/katakanaTest" element={<KatakanaTest />} />
           </Routes>
         </div>
       </section>

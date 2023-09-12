@@ -6,23 +6,10 @@ import { useState, useEffect, useRef } from "react";
 
 import { useLocation } from "react-router-dom";
 
-function HiraganaTest() {
+function KarakanaTest() {
   const effectRan = useRef(false)
   const location = useLocation();
-  const hiragana = location.state.details;
-
-  // const hiragana = Object.entries(location.state.details);
-  // console.log(hiragana[0]);
-  // const test = [];
-  // for (const entry of Array.prototype.values.call(hiragana)) {
-  //   console.log(entry["hiragana"]);
-  //   test.push({ hiragana: entry["hiragana"], romanji: entry["romanji"] });
-  // }
-  // if (location.state.id == 1) {
-  //   hiragana.push({ romanji: "bb", hieagana: "bb" });
-  // }
-
-  // console.log(hiragana);
+  const katakana = location.state.details;
 
   const [input, setInput] = useState("");
   const [current, setCurrent] = useState(0);
@@ -35,8 +22,8 @@ function HiraganaTest() {
   const [isDisabled, setIsDisabled] = useState(false);
   const [isShown, setIsShown] = useState(false);
 
-  const setRandomHiragana = () => {
-    const randomIndex = Math.floor(Math.random() * hiragana.length);
+  const setRandomKatakana = () => {
+    const randomIndex = Math.floor(Math.random() * katakana.length);
     setCurrent(randomIndex);
   };
 
@@ -47,7 +34,7 @@ function HiraganaTest() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsDisabled(!isDisabled)
-    if (input.toLocaleLowerCase() === hiragana[current].romanji) {
+    if (input.toLocaleLowerCase() === katakana[current].romanji) {
       setStreak(streak + 1)
       setMaxStreak(Math.max(streak + 1, maxStreak))
       setError(false)
@@ -58,7 +45,7 @@ function HiraganaTest() {
       localStorage.setItem('streak', streak + 1)
     } else {
       setStreak(0)
-      setError(`Wrong! The correct answer for ${hiragana[current].hiragana} is ${hiragana[current].romanji}`)
+      setError(`Wrong! The correct answer for ${katakana[current].katakana} is ${katakana[current].romanji}`)
       setCorrect(false)
       setIsShown(true)
       localStorage.setItem('streak', 0)
@@ -68,23 +55,23 @@ function HiraganaTest() {
     // setRandomHiragana();
   };
 
-  const nextHiragana = () => {
+  const nextKatakana = () => {
     setInput('')
-    setRandomHiragana()
+    setRandomKatakana()
     setIsDisabled(!isDisabled)
     setIsShown(false)
   }
 
-  const addHiragana = () => {
+  const addKatakana = () => {
     // if (location.state.id == 1) {
-    //   hiragana.push({ romanji: "bb", hieagana: "bb" });
+    //   katakana.push({ romanji: "bb", hieagana: "bb" });
     // }
   }
 
   useEffect(() => {
     if (effectRan.current === false) {
-      // addHiragana()
-      setRandomHiragana()
+      // addKatakana()
+      setRandomKatakana()
       setStreak(parseInt(localStorage.getItem('streak')) || 0)
       setMaxStreak(parseInt(localStorage.getItem('maxStreak')) || 0)
 
@@ -97,7 +84,7 @@ function HiraganaTest() {
     <>
       <div className="text-center min-h-screen flex flex-col justify-center">
         <header className="p-6 mb-8">
-          <h1 className="text-4xl font-bold uppercase">Hiragana Quiz</h1>
+          <h1 className="text-4xl font-bold uppercase">Katakana Quiz</h1>
           <div>
             <p>
               {/* Streak {streak} / {maxStreak} */}
@@ -107,7 +94,7 @@ function HiraganaTest() {
         </header>
 
         <div className="text-9xl font-bold mb-8">
-          <p>{hiragana[current].hiragana}</p>
+          <p>{katakana[current].katakana}</p>
         </div>
 
         <div className="mb-8">
@@ -125,10 +112,10 @@ function HiraganaTest() {
         {(error && isShown) && <p className="text-red-500 text-center">{error}</p>}
         {(correct && isShown) && <p className="text-green-500 text-center">{correct}</p>}
 
-        {((error || correct) && isShown) && <button onClick={nextHiragana}>Gimme Next!</button>}
+        {((error || correct) && isShown) && <button onClick={nextKatakana}>Gimme Next!</button>}
       </div>
     </>
   );
 }
 
-export default HiraganaTest;
+export default KarakanaTest;

@@ -2,121 +2,167 @@
 // import reactLogo from './assets/react.svg'
 // import viteLogo from '/vite.svg'
 // import './App.css'
+import { useNavigate } from "react-router-dom";
 
 function Katakana() {
 
-    const katakana = [
+    const katakanas = [
         {
             id: 1,
             name: "A to O",
             details: [
-                { katakana: "ア", hiragana: "a" },
-                { katakana: "イ", hiragana: "i" },
-                { katakana: "ウ", hiragana: "u" },
-                { katakana: "エ", hiragana: "e" },
-                { katakana: "オ", hiragana: "o" },
+                { katakana: "ア", romanji: "a" },
+                { katakana: "イ", romanji: "i" },
+                { katakana: "ウ", romanji: "u" },
+                { katakana: "エ", romanji: "e" },
+                { katakana: "オ", romanji: "o" },
             ],
         },
         {
             id: 2,
             name: "KA to KO",
             details: [
-                { katakana: "カ", hiragana: "ka" },
-                { katakana: "キ", hiragana: "ki" },
-                { katakana: "ク", hiragana: "ku" },
-                { katakana: "ケ", hiragana: "ke" },
-                { katakana: "コ", hiragana: "ko" },
+                { katakana: "カ", romanji: "ka" },
+                { katakana: "キ", romanji: "ki" },
+                { katakana: "ク", romanji: "ku" },
+                { katakana: "ケ", romanji: "ke" },
+                { katakana: "コ", romanji: "ko" },
             ],
         },
         {
             id: 3,
             name: "SA to SO",
             details: [
-                { katakana: "サ", hiragana: "sa" },
-                { katakana: "シ", hiragana: "shi" },
-                { katakana: "ス", hiragana: "su" },
-                { katakana: "セ", hiragana: "se" },
-                { katakana: "ソ", hiragana: "so" },
+                { katakana: "サ", romanji: "sa" },
+                { katakana: "シ", romanji: "shi" },
+                { katakana: "ス", romanji: "su" },
+                { katakana: "セ", romanji: "se" },
+                { katakana: "ソ", romanji: "so" },
             ],
         },
         {
             id: 4,
             name: "TA to TO",
             details: [
-                { katakana: "タ", hiragana: "ta" },
-                { katakana: "チ", hiragana: "chi" },
-                { katakana: "ツ", hiragana: "tsu" },
-                { katakana: "テ", hiragana: "te" },
-                { katakana: "ト", hiragana: "to" },
+                { katakana: "タ", romanji: "ta" },
+                { katakana: "チ", romanji: "chi" },
+                { katakana: "ツ", romanji: "tsu" },
+                { katakana: "テ", romanji: "te" },
+                { katakana: "ト", romanji: "to" },
             ],
         },
         {
             id: 5,
             name: "NA to NO",
             details: [
-                { katakana: "ナ", hiragana: "na" },
-                { katakana: "ニ", hiragana: "ni" },
-                { katakana: "ヌ", hiragana: "nu" },
-                { katakana: "ネ", hiragana: "ne" },
-                { katakana: "ノ", hiragana: "no" },
+                { katakana: "ナ", romanji: "na" },
+                { katakana: "ニ", romanji: "ni" },
+                { katakana: "ヌ", romanji: "nu" },
+                { katakana: "ネ", romanji: "ne" },
+                { katakana: "ノ", romanji: "no" },
             ],
         },
         {
             id: 6,
             name: "HA to HO",
             details: [
-                { katakana: "ハ", hiragana: "ha" },
-                { katakana: "ヒ", hiragana: "hi" },
-                { katakana: "フ", hiragana: "fu" },
-                { katakana: "ヘ", hiragana: "he" },
-                { katakana: "ホ", hiragana: "ho" },
+                { katakana: "ハ", romanji: "ha" },
+                { katakana: "ヒ", romanji: "hi" },
+                { katakana: "フ", romanji: "fu" },
+                { katakana: "ヘ", romanji: "he" },
+                { katakana: "ホ", romanji: "ho" },
             ],
         },
         {
             id: 7,
             name: "MA to MI",
             details: [
-                { katakana: "マ", hiragana: "ma" },
-                { katakana: "ミ", hiragana: "mi" },
-                { katakana: "ム", hiragana: "mu" },
-                { katakana: "メ", hiragana: "me" },
-                { katakana: "モ", hiragana: "mo" },
+                { katakana: "マ", romanji: "ma" },
+                { katakana: "ミ", romanji: "mi" },
+                { katakana: "ム", romanji: "mu" },
+                { katakana: "メ", romanji: "me" },
+                { katakana: "モ", romanji: "mo" },
             ],
         },
         {
             id: 8,
             name: "YA to YO",
             details: [
-                { katakana: "ヤ", hiragana: "ya" },
-                { katakana: "ユ", hiragana: "yu" },
-                { katakana: "ヨ", hiragana: "yo" },
+                { katakana: "ヤ", romanji: "ya" },
+                { katakana: "ユ", romanji: "yu" },
+                { katakana: "ヨ", romanji: "yo" },
             ],
         },
         {
             id: 9,
             name: "RA to RO",
             details: [
-                { katakana: "ラ", hiragana: "ra" },
-                { katakana: "リ", hiragana: "ri" },
-                { katakana: "ル", hiragana: "ru" },
-                { katakana: "レ", hiragana: "re" },
-                { katakana: "ロ", hiragana: "ro" },
+                { katakana: "ラ", romanji: "ra" },
+                { katakana: "リ", romanji: "ri" },
+                { katakana: "ル", romanji: "ru" },
+                { katakana: "レ", romanji: "re" },
+                { katakana: "ロ", romanji: "ro" },
             ],
         },
         {
             id: 10,
             name: "WA to N",
             details: [
-                { katakana: "ワ", hiragana: "wa" },
-                { katakana: "ヲ", hiragana: "wo" },
-                { katakana: "ン", hiragana: "n" },
+                { katakana: "ワ", romanji: "wa" },
+                { katakana: "ヲ", romanji: "wo" },
+                { katakana: "ン", romanji: "n" },
             ],
         },
     ]
+
+    const navigate = useNavigate();
+
+    const katakanaTest = (katakana) => {
+        navigate("/katakanaTest", { state: katakana });
+    };
+
     return (
         <>
-            <div>
-                Katakana
+            <div className=" max-h-screen">
+                <h6 className="flex justify-center pt-20 pb-14 text-4xl">
+                    Katakana Table
+                </h6>
+                <div className="flex justify-center items-start max-h-[25rem] overflow-scroll">
+                    {/* Katakana */}
+                    <div className="flex-1 max-w-5xl p-16 pt-0">
+                        {katakanas.map((katakana) => {
+                            return (
+                                <div className="text-sm pb-5" key={katakana.id}>
+                                    <h6 className="text-center pb-3">{katakana.name}</h6>
+                                    <div className="flex flex-row justify-center items-center pb-5">
+                                        <div className="grid grid-cols-5 grid-rows-1 gap-4 grid-flow-row-dense w-fit">
+                                            {katakana.details.map((character) => (
+                                                <div
+                                                    className="p-5 bg-white dark:bg-slate-700 border-1-8 border-transparent rounded-md shadow-md space-y-2 flex flex-col items-center"
+                                                    key={character.romanji}
+                                                >
+                                                    <h6 className="text-3xl font-semibold">
+                                                        {character.katakana}
+                                                    </h6>
+                                                    <p className="text-xs uppercase">
+                                                        {character.romanji}
+                                                    </p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                        <a className="p-5 pl-10"
+                                            onClick={() => {
+                                                katakanaTest(katakana);
+                                            }}
+                                        >
+                                            <button>Test</button>
+                                        </a>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
             </div>
         </>
     )

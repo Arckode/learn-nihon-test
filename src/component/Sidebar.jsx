@@ -2,18 +2,19 @@ import React from "react";
 import "../App.css";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { LuLayoutDashboard } from "react-icons/lu";
-import { FiUser } from "react-icons/fi";
 import { LuSettings } from "react-icons/lu";
 import { BsMoon } from "react-icons/bs";
 import { BsSun } from "react-icons/bs";
+import { TbLanguageHiragana } from "react-icons/tb";
+import { TbLanguageKatakana } from "react-icons/tb";
 import { Link, Route, Routes } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 function Sidebar() {
   const menus = [
     { name: "Dashboard", link: "/", icon: LuLayoutDashboard },
-    { name: "Hiragana", link: "/hiragana", icon: FiUser },
-    { name: "Katakana", link: "/katakana", icon: FiUser },
+    { name: "Hiragana", link: "/hiragana", icon: TbLanguageHiragana },
+    { name: "Katakana", link: "/katakana", icon: TbLanguageKatakana },
     { name: "Setting", link: "/", icon: LuSettings, margin: true },
     { name: "EX", link: "/", icon: LuSettings },
   ];
@@ -58,7 +59,7 @@ function Sidebar() {
               className={`${menu?.margin && "mt-5"
                 } group flex items-center text-sm gap-3.5 font-medium p-2 hover:bg-gray-800 rounded-md`}
             >
-              <div>{React.createElement(menu?.icon, { size: "20 " })}</div>
+              <div>{React.createElement(menu?.icon, { size: "22" })}</div>
               <h2
                 style={{
                   transitionDelay: `${i + 3}00ms`,
