@@ -76,14 +76,31 @@ function HiraganaTest() {
   }
 
   const addHiragana = () => {
-    // if (location.state.id == 1) {
-    //   hiragana.push({ romanji: "bb", hieagana: "bb" });
+    if (location.state.id == 1) {
+      hiragana.push(
+        { romanji: "ai", hiragana: "あい", translate: "Love" },
+        { romanji: "ao", hiragana: "あお", translate: "Blue" },
+        { romanji: "ue", hiragana: "うえ", translate: "Top, Upper" },
+        { romanji: "iie", hiragana: "いいえ", translate: "no" },
+      );
+    }
+    else if (location.state.id == 2) {
+      hiragana.push(
+        { romanji: "koukou", hiragana: "こうこう", translate: "High School" },
+        { romanji: "kuukou", hiragana: "くうこう", translate: "Airport" },
+      )
+    }
+    // else if (location.state.id == 3) {
+    //   hiragana.push(
+    //     { romanji: "koukou", hiragana: "こうこう", translate: "High School" },
+    //     { romanji: "kuukou", hiragana: "くうこう", translate: "Airport" },
+    //   )
     // }
   }
 
   useEffect(() => {
     if (effectRan.current === false) {
-      // addHiragana()
+      addHiragana()
       setRandomHiragana()
       setStreak(parseInt(localStorage.getItem('streak')) || 0)
       setMaxStreak(parseInt(localStorage.getItem('maxStreak')) || 0)
