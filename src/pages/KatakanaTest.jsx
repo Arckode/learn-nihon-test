@@ -82,6 +82,9 @@ function KarakanaTest() {
   }, []);
   return (
     <>
+      <div className="p-5 flex justify-end">
+        <Link to={'/katakana'}><AiOutlineClose /></Link>
+      </div>
       <div className="text-center min-h-screen flex flex-col justify-center">
         <header className="p-6 mb-8">
           <h1 className="text-4xl font-bold uppercase">Katakana Quiz</h1>

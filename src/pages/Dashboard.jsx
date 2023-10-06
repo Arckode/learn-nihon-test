@@ -5,10 +5,13 @@
 
 function Dashboard() {
 
+  const streak = localStorage.getItem('streak');
+
   return (
     <>
       <div>
-      Dashboard
+        Dashboard <br></br>
+        Current streak is at {streak}! Keep it up!
       </div>
     </>
   )
